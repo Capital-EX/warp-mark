@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://scenes/Main.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Worlds/World-01.tscn" type="PackedScene" id=2]
+
+[node name="Main" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="ViewportSprite" type="ViewportSprite" parent="."]
+
+transform/scale = Vector2( 2, 2 )
+viewport = NodePath("Viewport")
+centered = false
+
+[node name="Viewport" type="Viewport" parent="ViewportSprite"]
+
+rect = Rect2( 0, 0, 256, 256 )
+own_world = false
+world = null
+transparent_bg = false
+render_target/enabled = true
+render_target/v_flip = false
+render_target/clear_on_new_frame = true
+render_target/filter = false
+render_target/gen_mipmaps = false
+render_target/update_mode = 2
+audio_listener/enable_2d = false
+audio_listener/enable_3d = false
+physics/object_picking = false
+gui/disable_input = false
+
+[node name="World-01" parent="ViewportSprite/Viewport" instance=ExtResource( 2 )]
+
+[connection signal="next_world" from="ViewportSprite/Viewport/World-01" to="." method="_on_next_world"]
+
+[connection signal="reset" from="ViewportSprite/Viewport/World-01" to="." method="_on_reset"]
+
+
