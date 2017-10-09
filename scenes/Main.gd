@@ -17,7 +17,6 @@ func _on_next_world(where):
 	next.connect("reset", self, "_on_reset")
 	current_world = next.get_name()
 	current_scene = where
-	
 	viewport.add_child(next, true)
 	
 
